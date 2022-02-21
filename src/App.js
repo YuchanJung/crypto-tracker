@@ -1,38 +1,49 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
-const Father = styled.div`
+const Wrapper = styled.div`
   display: flex;
 `;
 
+const rotationAnimation = keyframes`
+  0% {
+    transform: rotate(0deg);
+    border-radius: 0px;
+  }
+  50% {
+    border-radius: 100px; // width, height : 100px -> 체감상  원 되는속도 빨라보임
+  }
+  100% {
+    transform: rotate(360deg);
+    border-radius: 0px;
+  }
+`;
+
 const Box = styled.div`
-  background-color: ${props => props.bgColor};
   width: 100px;
   height: 100px;
-`;
-
-const Circle = styled(Box)`
-  border-radius: 50px;
-`;
-
-const Btn = styled.button`
-  color: white;
   background-color: tomato;
-  border: 0px;
-  border-radius: 15px;
-`;
-
-const Input = styled.input.attrs({ required: true, minlength: 10 })`
-  background-color: tomato;
+  animation:${rotationAnimation} 1s linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  span {
+    font-size: 25px;
+    &:hover {
+      font-size: 40px;
+    }
+    &:active {
+      opacity: 0;
+    }
+  }
 `;
 
 function App() {
   return (
-    <Father>
-      <Btn>Log in</Btn>
-      <Btn as="a" href="/">Log in</Btn>
-      <Input />
-      <Input />
-    </Father>
+    <Wrapper>
+      <Box>
+        <span>smile</span>
+      </Box>
+    </Wrapper>
   );
 }
 
