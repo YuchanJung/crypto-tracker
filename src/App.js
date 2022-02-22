@@ -18,22 +18,20 @@ const rotationAnimation = keyframes`
   }
 `;
 
+const Emoji = styled.span`
+  font-size: 36px;
+`;
+
 const Box = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   background-color: tomato;
   animation:${rotationAnimation} 1s linear infinite;
   display: flex;
   justify-content: center;
   align-items: center;
-  span {
-    font-size: 25px;
-    &:hover {
-      font-size: 40px;
-    }
-    &:active {
-      opacity: 0;
-    }
+  ${Emoji}:hover {
+      font-size: 98px;
   }
 `;
 
@@ -41,7 +39,7 @@ function App() {
   return (
     <Wrapper>
       <Box>
-        <span>smile</span>
+        <Emoji>smile</Emoji>
       </Box>
     </Wrapper>
   );
