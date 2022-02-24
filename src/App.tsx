@@ -3,8 +3,8 @@ import Circle from "./Circle";
 function App() {
   return (
     <div>
-      <Circle bgColor="tomato"/>
-      <Circle bgColor="teal"/>
+      <Circle borderColor="black" bgColor="tomato"/>
+      <Circle text="I'm here" bgColor="teal"/>
     </div>
   );
 }
