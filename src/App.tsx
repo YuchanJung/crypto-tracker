@@ -1,4 +1,14 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+
+const Container = styled.div`
+  background-color: ${(props) => props.theme.bgColor};
+`;
+
+const H1 = styled.div`
+  color: ${(props) => props.theme.textColor};
+`;
+
 
 function App() {
   const [value, setValue] = useState("");
@@ -23,6 +33,9 @@ function App() {
         />
         <button>Log in</button>
       </form>
+      <Container>
+        <H1>protected</H1>
+      </Container>
     </div>
   );
 }
