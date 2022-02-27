@@ -30,9 +30,11 @@ const Coin = styled.li`
   margin-bottom: 10px;
   border-radius: 15px;
   a {
+    display: flex;
+    align-items: center;
     padding: 20px; /* 패딩 위치를 어디에 넣냐에 따라 링크 클릭 범위가 달라짐 */
     transition: color 0.2s ease-in;
-    display: block; /* 글씨 밖까지 클릭되게 함 */
+    /* display: block; /* 글씨 밖까지 클릭되게 함 */
   }
   &:hover {
     a {
@@ -43,6 +45,12 @@ const Coin = styled.li`
 
 const Loader = styled.div`
   text-align: center;
+`;
+
+const LogoImg = styled.img`
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
 `;
 
 interface CoinInterface {
@@ -78,7 +86,12 @@ function Coins() {
         <CoinsList>
           {coins.map((coin) => (
             <Coin key={coin.id}>
-              <Link to={`/${coin.id}`}>{coin.name} &rarr;</Link>
+              <Link to={`/${coin.id}`}>
+                <LogoImg
+                  src={`https://cryptoicon-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}
+                />
+                {coin.name} &rarr;
+              </Link>
             </Coin>
           ))}
         </CoinsList>
