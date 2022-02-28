@@ -25,6 +25,31 @@ const Loader = styled.div`
   text-align: center;
 `;
 
+const OverView = styled.div`
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  border-radius: 10px;
+`;
+
+const OverViewItem = styled.div`
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  span:first-child {
+    font-size: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+`;
+
+const Description = styled.p`
+  margin: 20px 0px;
+`;
 
 interface RouteParams {
   coinID: string;
@@ -108,21 +133,50 @@ function Coin() {
       const infoData = await(
         await fetch(`https://api.coinpaprika.com/v1/coins/${coinID}`)
       ).json();
-      console.log(infoData);
       const priceData = await(
         await fetch(`https://api.coinpaprika.com/v1/tickers/${coinID}`)
       ).json();
-      console.log(priceData);
       setCoinInfo(infoData);
       setPriceInfo(priceData);
+      setLoading(false);
     })();
-  }, []);
+  }, [coinID]);
   return (
     <Containter>
       <Header>
-        <Title>{state?.name || "Loading..."}</Title>
+        <Title>{state?.name ? state.name : loading ? "Loading.." : coinInfo?.name}</Title>
       </Header>
-      {loading ? <Loader>Loading...</Loader> : null }
+      {loading ? (
+        <Loader>Loading...</Loader>
+      ) : (
+        <>
+          <OverView>
+            <OverViewItem>
+              <span>rank:</span>
+              <span>{coinInfo?.rank}</span>
+            </OverViewItem>
+            <OverViewItem>
+              <span>symbol:</span>
+              <span>${coinInfo?.symbol}</span>
+            </OverViewItem>
+            <OverViewItem>
+              <span>open source:</span>
+              <span>{coinInfo?.open_source ? "Yes" : "No"}</span>
+            </OverViewItem>
+          </OverView>
+          <Description>{coinInfo?.description}</Description>
+          <OverView>
+            <OverViewItem>
+              <span>total supply:</span>
+              <span>{priceInfo?.total_supply}</span>
+            </OverViewItem>
+            <OverViewItem>
+              <span>max supply:</span>
+              <span>{priceInfo?.max_supply}</span>
+            </OverViewItem>
+          </OverView>
+        </>
+      )}
     </Containter>
   );
 }
