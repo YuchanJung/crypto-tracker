@@ -163,7 +163,7 @@ function Coin() {
     ["tickers", coinID],
     () => fetchCoinTickers(coinID)
   );
-  const loading = infoLoading || tickersLoading;
+  const loading = infoLoading && tickersLoading;
   return (
     <Containter>
       <Header>
