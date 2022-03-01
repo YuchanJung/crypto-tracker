@@ -149,9 +149,9 @@ interface PriceData {
 }
 
 function Coin() {
-  const [loading, setLoading] = useState(true);
   const { coinID } = useParams<RouteParams>();
   const { state } = useLocation<RouteStates>();
+  const [loading, setLoading] = useState(true);
   const [coinInfo, setCoinInfo] = useState<CoinInfoData>();
   const [priceInfo, setPriceInfo] = useState<PriceData>();
   const priceMatch = useRouteMatch("/:coinID/price");
