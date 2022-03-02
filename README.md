@@ -1,4 +1,4 @@
-# React prac - masterclass
+# Movie App
 
 2022.02.19 ~ updating
 
