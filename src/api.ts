@@ -18,7 +18,7 @@ export function fetchCoinTickers(coinID: string) {
 
 export function fetchCoinHistory(coinID: string) {
   const endTime = Math.floor(Date.now() / 1000); // 내림처리 (milliseconds to seconds)
-  const startTime = endTime - 60 * 60 * 24 * 7 * 4; // 2주
+  const startTime = endTime - 60 * 60 * 24 * 7 * 4; // 4주
   return fetch(`${BASE_URL}/coins/${coinID}/ohlcv/historical?start=${startTime}&end=${endTime}`).then(
     (response) => response.json()
   );
