@@ -213,7 +213,7 @@ function Coin() {
               <Price />
             </Route>
             <Route path={`/:coinID/chart`}>
-              <Chart />
+              <Chart coinID={coinID}/>
             </Route>
           </Switch>
         </>
