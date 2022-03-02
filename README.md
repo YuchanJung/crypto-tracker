@@ -1,4 +1,4 @@
-# Movie App
+# Crypto Tracker
 
 2022.02.19 ~ updating
 
