@@ -39,10 +39,10 @@ const OverView = styled.div`
 `;
 
 const OverViewItem = styled.div`
-  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 33%;
   span:first-child {
     font-size: 10px;
     font-weight: 400;
@@ -57,7 +57,7 @@ const Description = styled.p`
 
 const Tabs = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   margin: 20px 0px;
 `;
@@ -69,13 +69,13 @@ const Tab = styled.span<{ isActive: boolean }>`
   font-weight: 400;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
-  padding: 7px 0px;
   color: ${props => props.isActive ? props.theme.accentColor : props.theme.textColor};
   &:hover{
     background-color: rgba(0, 0, 0, 0.7);
   }
   a {
     display: block;
+    padding: 7px 0px;
   }
 `;
 
