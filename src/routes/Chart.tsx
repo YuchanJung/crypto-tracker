@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import { fetchCoinHistory } from "../api";
 import ApexChart from "react-apexcharts";
+import Price from "./Price";
 
 interface IHistorical {
   time_open: string;
@@ -27,11 +28,13 @@ function Chart({ coinID }: ChartProps) {
         "Loading Charts..."
       ) : (
         <ApexChart
-          type="line"
+          type="candlestick"
           series={[
             {
-              name: "Price",
-              data: data?.map((price) => price.close),
+              data: data?.map((d) => ({
+                x: new Date(Date.parse(d.time_close)),
+                y: [d.open, d.high, d.low, d.close],
+              })),
             },
           ]}
           options={{
@@ -42,31 +45,37 @@ function Chart({ coinID }: ChartProps) {
               background: "transparent",
               height: 500,
               width: 500,
-              dropShadow: { enabled: true },
             },
             grid: {
               borderColor: "#7f8fa6",
             },
             stroke: {
-              curve: "smooth",
-              width: 4,
+              width: 2,
             },
             xaxis: {
               labels: { show: false },
-              axisTicks: { show: false },
               axisBorder: { show: false },
+              axisTicks: { show: false },
               type: "datetime",
-              categories: data?.map((price) => price.time_close),
+              categories: data?.map((d) => d.time_close),
             },
             yaxis: {
               labels: {
                 formatter: (value) => `${value.toFixed(0)}`,
               },
             },
+            plotOptions: {
+              candlestick: {
+                colors: {
+                  upward: "#40739e",
+                  downward: "#273c75",
+                },
+              },
+            },
             tooltip: {
               y: {
-                formatter: (value) => `$ ${value.toFixed(2)}`,
-              },
+                formatter: (value => value.toFixed(2))
+              }, /* do not work..*/
             },
           }}
         />
