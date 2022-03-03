@@ -1,7 +1,6 @@
 import { useQuery } from "react-query";
 import { fetchCoinHistory } from "../api";
 import ApexChart from "react-apexcharts";
-import Price from "./Price";
 
 interface IHistorical {
   time_open: string;
