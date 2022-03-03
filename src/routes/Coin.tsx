@@ -159,10 +159,14 @@ function Coin() {
     ["info", coinID],
     () => fetchCoinInfo(coinID)
   );
-  const { isLoading: tickersLoading, data: ticekrsData } = useQuery<ITickersData>(
-    ["tickers", coinID],
-    () => fetchCoinTickers(coinID)
-  );
+  const { isLoading: tickersLoading, data: ticekrsData } =
+    useQuery<ITickersData>(
+      ["tickers", coinID],
+      () => fetchCoinTickers(coinID),
+      {
+        refetchInterval: 5000,
+      }
+    );
   const loading = infoLoading && tickersLoading;
   return (
     <Containter>
@@ -185,8 +189,8 @@ function Coin() {
               <span>${infoData?.symbol}</span>
             </OverViewItem>
             <OverViewItem>
-              <span>open source:</span>
-              <span>{infoData?.open_source ? "Yes" : "No"}</span>
+              <span>price :</span>
+              <span>{ticekrsData?.quotes.USD.price.toFixed(2)}</span>
             </OverViewItem>
           </OverView>
           <Description>{infoData?.description}</Description>
