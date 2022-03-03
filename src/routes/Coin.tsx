@@ -1,6 +1,13 @@
-import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useQuery } from "react-query";
-import { Link, Route, Switch, useLocation, useParams, useRouteMatch } from "react-router-dom";
+import {
+  Link,
+  Route,
+  Switch,
+  useLocation,
+  useParams,
+  useRouteMatch,
+} from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
 import Chart from "./Chart";
@@ -170,6 +177,9 @@ function Coin() {
   const loading = infoLoading && tickersLoading;
   return (
     <Containter>
+      <Helmet>
+        <title>{state?.name ? state.name : loading ? "Loading.." : infoData?.name}</title>
+      </Helmet>
       <Header>
         <Title>
           {state?.name ? state.name : loading ? "Loading.." : infoData?.name}
