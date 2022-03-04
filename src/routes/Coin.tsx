@@ -77,6 +77,7 @@ const Tab = styled.span<{ isActive: boolean }>`
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   color: ${props => props.isActive ? props.theme.accentColor : props.theme.textColor};
+  transition: 0.3s ease-in;
   &:hover{
     background-color: rgba(0, 0, 0, 0.7);
   }
@@ -216,10 +217,10 @@ function Coin() {
           </OverView>
           <Tabs>
             <Tab isActive={chartMatch !== null}>
-              <Link to={`/${coinID}/chart`}>Chart</Link>
+              <Link to={chartMatch ? `/${coinID}` : `/${coinID}/chart`}>Chart</Link>
             </Tab>
             <Tab isActive={priceMatch !== null}>
-              <Link to={`/${coinID}/price`}>Price</Link>
+              <Link to={priceMatch? `/${coinID}` : `/${coinID}/price`}>Price</Link>
             </Tab>
           </Tabs>
           <Switch>
