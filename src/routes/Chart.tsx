@@ -31,7 +31,7 @@ function Chart({ coinID }: ChartProps) {
           series={[
             {
               data: data?.map((d) => ({
-                x: new Date(Date.parse(d.time_close)),
+                x: new Date(Date.parse(d.time_open)),
                 y: [d.open, d.high, d.low, d.close],
               })),
             },
@@ -49,7 +49,7 @@ function Chart({ coinID }: ChartProps) {
               borderColor: "#7f8fa6",
             },
             stroke: {
-              width: 2,
+              width: 1,
             },
             xaxis: {
               labels: { show: false },
@@ -66,8 +66,8 @@ function Chart({ coinID }: ChartProps) {
             plotOptions: {
               candlestick: {
                 colors: {
-                  upward: "#40739e",
-                  downward: "#273c75",
+                  // upward: "#40739e",
+                  // downward: "#273c75",
                 },
               },
             },
