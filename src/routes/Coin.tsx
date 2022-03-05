@@ -12,10 +12,11 @@ import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
 import Chart from "./Chart";
 import Price from "./Price";
+import backLogo from "../img/back-arrow.png";
 
 const Containter = styled.div`
   padding: 0px 20px;
-  max-width: 480px;
+  max-width: 420px;
   margin: 0 auto;
 `;
 
@@ -23,13 +24,31 @@ const Containter = styled.div`
 const Header = styled.header`
   height: 15vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 `;
 
-const Title = styled.h1`
-  font-size: 48px;
-  color: ${(props) => props.theme.accentColor};
+const BackLink = styled.div`
+  margin-left: 3px;
+  margin-right: 10px;
+`;
+
+const BackLinkImg = styled.img`
+  height: 30px;
+  width: 30px;
+`;
+
+const Title = styled.div`
+  display: flex;
+  flex-direction: column;
+  h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-size: 14px;
+  }
+  // color: ${(props) => props.theme.accentColor};
 `;
 
 const Loader = styled.div`
@@ -93,6 +112,7 @@ interface RouteParams {
 
 interface RouteStates {
   name: string;
+  symbol: string;
 }
 
 interface IInfoData {
@@ -179,11 +199,25 @@ function Coin() {
   return (
     <Containter>
       <Helmet>
-        <title>{state?.name ? state.name : loading ? "Loading.." : infoData?.name}</title>
+        <title>
+          {state?.name ? state.name : loading ? "Loading.." : infoData?.name}
+        </title>
       </Helmet>
       <Header>
+        <BackLink>
+          <Link to={`/`}>
+            <BackLinkImg src={backLogo}/>
+          </Link>
+        </BackLink>
         <Title>
-          {state?.name ? state.name : loading ? "Loading.." : infoData?.name}
+          <h1>
+            {state?.symbol
+              ? state.symbol + "USD"
+              : loading
+              ? "Loading..."
+              : infoData?.symbol + "USD"}
+          </h1>
+          <h2>{state?.name ? state.name : loading ? "..." : infoData?.name}</h2>
         </Title>
       </Header>
       {loading ? (
@@ -217,10 +251,14 @@ function Coin() {
           </OverView>
           <Tabs>
             <Tab isActive={chartMatch !== null}>
-              <Link to={chartMatch ? `/${coinID}` : `/${coinID}/chart`}>Chart</Link>
+              <Link to={chartMatch ? `/${coinID}` : `/${coinID}/chart`}>
+                Chart
+              </Link>
             </Tab>
             <Tab isActive={priceMatch !== null}>
-              <Link to={priceMatch? `/${coinID}` : `/${coinID}/price`}>Price</Link>
+              <Link to={priceMatch ? `/${coinID}` : `/${coinID}/price`}>
+                Price
+              </Link>
             </Tab>
           </Tabs>
           <Switch>
@@ -228,7 +266,7 @@ function Coin() {
               <Price />
             </Route>
             <Route path={`/:coinID/chart`}>
-              <Chart coinID={coinID}/>
+              <Chart coinID={coinID} />
             </Route>
           </Switch>
         </>

@@ -6,7 +6,7 @@ import { fetchCoins } from "../api";
 
 const Containter = styled.div`
   padding: 0px 20px;
-  max-width: 480px;
+  max-width: 420px;
   margin: 0 auto;
 `;
 
@@ -92,10 +92,12 @@ function Coins() {
         <CoinsList>
           {data?.slice(0, 100).map((coin) => (
             <Coin key={coin.id}>
-              <Link to={{
-                pathname: `/${coin.id}`,
-                state: {name: coin.name},
-              }}>
+              <Link
+                to={{
+                  pathname: `/${coin.id}`,
+                  state: { name: coin.name, symbol: coin.symbol },
+                }}
+              >
                 <LogoImg
                   src={`https://cryptoicon-api.vercel.app/api/icon/${coin.symbol.toLowerCase()}`}
                 />
