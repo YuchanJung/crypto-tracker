@@ -1,7 +1,9 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Router from "./Router";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { HelmetProvider } from "react-helmet-async";
+import { lightTheme, darkTheme } from "./theme";
+import { useState } from "react";
 
 
 const GlobalStyle = createGlobalStyle`
@@ -68,13 +70,18 @@ a {
 `;
 
 function App() {
+  const [isDark, setIsDark] = useState(false);
+  const toggleDark = () => setIsDark((current) => !current);
   return (
     <>
-      <GlobalStyle />
-      <HelmetProvider>
-        <Router />
-      </HelmetProvider>
-      <ReactQueryDevtools initialIsOpen={true} />
+      <ThemeProvider theme={isDark ? lightTheme : darkTheme}>
+        <button onClick={toggleDark}>Toggle Mode</button>
+        <GlobalStyle />
+        <HelmetProvider>
+          <Router />
+        </HelmetProvider>
+        <ReactQueryDevtools initialIsOpen={true} />
+      </ThemeProvider>
     </>
   );
 }
